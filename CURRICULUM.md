@@ -87,4 +87,4 @@ A capstone should contain the population, treatment strategies, outcome and time
 
 First evaluate these three opening chapters with learners. Then adapt uncertainty through outcome regression, followed by causal roles and model limitations. Add the closing analysis project before broadening to new study designs. Keep the browser, coding, and tutor paths aligned on learning objectives without requiring identical interfaces.
 
-The [course manifest](course.json) lists only material available here. A future website or book can consume these Markdown sources; neither has been built for this initial package.
+The [course manifest](course.json) lists only material available here. The [reading website](https://kirilklein.github.io/causal-inference-from-scratch/) uses this manifest and these same Markdown sources. Book generation remains a future addition.

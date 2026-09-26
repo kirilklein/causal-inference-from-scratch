@@ -30,8 +30,21 @@ python3 scripts/check_course.py
 python3 scripts/export_diagrams.py --check
 ```
 
-`unittest` checks numerical and scientific invariants. `check_course.py` checks local links, the lesson manifest, prerequisites, and required artifacts, then runs all registered labs. It does not verify external website availability or learner comprehension. No third-party formatter or linter is required by this repository.
+`unittest` checks numerical and scientific invariants. `check_course.py` checks local links, the lesson manifest, prerequisites, and required artifacts, then runs all registered labs. It does not verify external website availability or learner comprehension. No third-party formatter or linter is required for the Python course files.
 
-README artwork is authored as self-contained HTML and exported to SVG. See [artwork maintenance](assets/README.md). When adding a chapter, update the visible counts and status labels as well as the manifest. See [automation and publishing](docs/automation.md) for the current CI scope and future website options.
+README artwork is authored as self-contained HTML and exported to SVG. See [artwork maintenance](assets/README.md). When adding a chapter, update the visible counts and status labels as well as the manifest. The website derives its chapter list and count from `course.json`, and chapter descriptions from each opening `**Takeaway:**` paragraph. Keep that paragraph on one line. Edit lesson content in the existing Markdown files, never in generated `dist/` pages.
+
+For website changes, use Node.js 22 or newer:
+
+```bash
+npm ci
+npm test
+npm run build
+npx playwright install chromium
+npm run test:browser
+npm run format:check
+```
+
+Format only changed website files with `npx prettier --write <files>`. See [automation and publishing](docs/automation.md) for the publishing workflow and browser-check scope.
 
 Learner progress belongs in ignored `CAUSAL-LEARNING.md`, not in commits. Tutor practice attempts and first answers should remain distinguishable.

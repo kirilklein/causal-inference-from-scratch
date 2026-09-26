@@ -1,0 +1,22 @@
+{
+  "name": "causal-inference-from-scratch",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node site/build.mjs",
+    "preview": "node site/serve.mjs",
+    "test": "node --test site/tests/build.test.mjs",
+    "test:browser": "playwright test",
+    "format:check": "prettier --check site package.json playwright.config.mjs .github/workflows/website.yml"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "marked": "18.0.14"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "prettier": "3.9.9"
+  }
+}

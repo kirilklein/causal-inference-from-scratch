@@ -1,30 +1,46 @@
 # Automation and publishing
 
-## What we need now
+## One source for the course
 
-GitHub hosts the Markdown course and README artwork directly. The simulations linked from the chapters already run on the Causal Sandbox website. A separate deployment service would currently have no course website to deploy.
+The reading website is generated from `course.json`, the chapter Markdown, their Python labs, and `CURRICULUM.md`. GitHub and the website present the same lessons. Causal Sandbox hosts the interactive experiments linked by the manifest and chapters.
 
-Our [CI workflow](../.github/workflows/ci.yml) runs on pushes and pull requests with Python 3.10 and 3.13. It verifies numerical behavior, the lesson manifest and prerequisites, local links including HTML image references, execution of each registered lab, and synchronization of the SVG artwork with its HTML sources. The workflow has read-only repository permissions.
+`node site/build.mjs` writes a static site to ignored `dist/`. It uses Marked to render Markdown during the build, rewrites links between published chapters and exercises to website routes, and links other repository files back to GitHub. Each chapter's opening `**Takeaway:**` supplies its catalog description. Raw HTML in Markdown is escaped. The current lessons use ordinary Markdown and code notation; there is no LaTeX or custom figure-block renderer.
 
-CI does not establish learner comprehension, check live external links, or test a tutor's behavior. Those need separate evaluation.
+The generated HTML contains the lesson text, navigation, and roadmap. JavaScript enhances it with chapter filtering, a theme preference, and optional reading marks. Reading and following links work without JavaScript. Browser progress is a local reading record, not validated mastery, and is separate from the tutor's `CAUSAL-LEARNING.md` and Sandbox progress. The site does not add analytics, accounts, or external font requests.
 
-## How AI Engineering from Scratch handles it
+## Preview and check
 
-Inspected revision: [`8bc378c`](https://github.com/rohitg00/ai-engineering-from-scratch/tree/8bc378c2e07777899322ae77cd0dde94cb12fab3).
+Use Node.js 22 or newer. Python 3.10 or newer remains sufficient for course labs and scientific checks.
 
-| Concern | Reference course | This course |
-| --- | --- | --- |
-| Curriculum and code | [Curriculum workflow](https://github.com/rohitg00/ai-engineering-from-scratch/blob/8bc378c2e07777899322ae77cd0dde94cb12fab3/.github/workflows/curriculum.yml): audits, lesson tests, site build, route checks, skill consistency, and generated-content synchronization | Keep the existing numerical and course checks; verify README exports as part of CI |
-| Website | [Vercel configuration](https://github.com/rohitg00/ai-engineering-from-scratch/blob/8bc378c2e07777899322ae77cd0dde94cb12fab3/vercel.json): runs `node site/build.js`, serves `site/`, and routes lesson and Markdown requests through API handlers | No separate website yet; GitHub renders the course and Causal Sandbox hosts experiments |
-| Books | [Book workflow](https://github.com/rohitg00/ai-engineering-from-scratch/blob/8bc378c2e07777899322ae77cd0dde94cb12fab3/.github/workflows/build-book.yml): EPUB on relevant pushes, EPUB/PDF on manual runs and releases, and release attachments | Defer until enough chapters exist to justify a book and its rendering checks |
-| Languages | [Translation workflow](https://github.com/rohitg00/ai-engineering-from-scratch/blob/8bc378c2e07777899322ae77cd0dde94cb12fab3/.github/workflows/translate.yml): machine translation of lessons and interface strings, published on a translations branch | English only for now; add translation together with review of technical terminology |
+```bash
+npm ci
+npm run build
+npm run preview
+```
 
-These files show configured automation. We have not verified the reference project's hosting dashboard, secrets, or deployment account settings.
+Open <http://127.0.0.1:4173/causal-inference-from-scratch/>. The preview serves only `dist/`, at the same project path used on GitHub Pages. It does not hot reload: rebuild and refresh after edits. Set `PORT` to choose a different preview port.
 
-## When to add deployment
+```bash
+npm test
+npx playwright install chromium
+npm run test:browser
+npm run format:check
+```
 
-Add a reading website when we want navigation, search, or a reading experience beyond GitHub. Generate it from the existing Markdown and `course.json`, validate the build and local routes in pull requests, and deploy only after the checks pass on `main`.
+For local Chrome instead of downloaded Chromium, run `PLAYWRIGHT_CHANNEL=chrome npm run test:browser`. Browser tests start their own server on port 4173, which must be free.
 
-GitHub Pages would be a suitable first option for a static reader. Vercel becomes relevant if we need server-side routes like the reference course's lesson and Markdown handlers. Neither platform is required to embed the current SVG banner in a README.
+Build tests verify every published section, unchanged downloadable labs, internal routes and heading anchors, and separation of solutions. Browser tests exercise search, chapter navigation, reading marks, denied storage, JavaScript-disabled reading, and light/dark layouts at phone and desktop widths. Screenshots are written to ignored `test-results/` for visual inspection.
 
-Book generation and translation are independent additions, not prerequisites for publishing new chapters. Preserve one source for lesson content across the repository, any future website, and future books.
+The [course workflow](../.github/workflows/ci.yml) continues to check numerical behavior, manifest prerequisites, links, registered labs, and README artwork on Python 3.10 and 3.13. The [website workflow](../.github/workflows/website.yml) also runs course checks before building and testing the reader. These checks do not establish learner comprehension or verify live external links.
+
+## GitHub Pages
+
+The site targets <https://kirilklein.github.io/causal-inference-from-scratch/>. In repository **Settings → Pages**, set the source to **GitHub Actions** before the first deployment. No custom domain or paid hosting is required.
+
+Pull requests build and test the site and upload the Pages artifact without deploying. On `main`, the deploy job runs only after the build and its checks succeed. Only the deploy job receives `pages: write` and `id-token: write`. A manual workflow run from `main` can redeploy the course. Keep the base path and canonical origin in `site/build.mjs` aligned if the hosting address changes.
+
+## Relationship to the reference course
+
+The format is inspired by [AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch), whose automation was initially inspected at [`8bc378c`](https://github.com/rohitg00/ai-engineering-from-scratch/tree/8bc378c2e07777899322ae77cd0dde94cb12fab3). This reader uses an original layout following our README artwork and pre-renders lessons rather than loading lesson Markdown from GitHub while someone is reading. It does not require the reference course's server-side routes.
+
+Book generation and translation remain independent future additions. Keep one source for lesson content when adding either.

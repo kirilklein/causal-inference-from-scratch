@@ -59,7 +59,11 @@ def check():
 
     # Check inline Markdown links and embedded HTML; external availability is not checked.
     for document in ROOT.rglob("*.md"):
-        if any(part.startswith(".") for part in document.relative_to(ROOT).parts):
+        if any(
+            part.startswith(".")
+            or part in ("node_modules", "dist", "test-results", "playwright-report")
+            for part in document.relative_to(ROOT).parts
+        ):
             continue
         if document.name == "CAUSAL-LEARNING.md":
             continue

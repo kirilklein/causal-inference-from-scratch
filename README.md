@@ -4,7 +4,7 @@
 </picture>
 
 <p align="center">
-  <strong><a href="phases/01-causal-questions/01-what-if/README.md">Start the course</a> · <a href="https://kirilklein.github.io/causal-sandbox/?lesson=what-if">Open the interactive lab</a> · <a href="CURRICULUM.md">Explore the curriculum</a></strong>
+  <strong><a href="https://kirilklein.github.io/causal-inference-from-scratch/">Read the website</a> · <a href="phases/01-causal-questions/01-what-if/README.md">Start on GitHub</a> · <a href="https://kirilklein.github.io/causal-sandbox/?lesson=what-if">Open the interactive lab</a> · <a href="CURRICULUM.md">Explore the curriculum</a></strong>
 </p>
 
 <p align="center">
@@ -118,7 +118,17 @@ python3 scripts/check_course.py
 python3 scripts/export_diagrams.py --check
 ```
 
-GitHub serves the course's Markdown and SVGs directly. The interactive lab is already hosted by Causal Sandbox, so this repository currently needs no website deployment. A future reading website can reuse these chapters. See [automation and publishing](docs/automation.md) for the comparison with AI Engineering from Scratch and the next steps.
+The [reading website](https://kirilklein.github.io/causal-inference-from-scratch/) is generated from `course.json` and these same Markdown chapters. It includes chapter search, separate exercises and solutions, downloadable Python labs, and optional reading marks saved in your browser. Causal Sandbox continues to host the interactive experiments.
+
+To preview the website, install Node.js 22 or newer and run:
+
+```bash
+npm ci
+npm run build
+npm run preview
+```
+
+Open <http://127.0.0.1:4173/causal-inference-from-scratch/>. Website checks run in pull requests; deployment runs after all website and course checks pass on `main`. See [automation and publishing](docs/automation.md) for setup and validation.
 
 ## Sources, credit, and contributions
 

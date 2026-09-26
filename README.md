@@ -4,6 +4,8 @@
 
 Learn causal inference through written lessons, interactive experiments, and small Python implementations. [Causal Sandbox](https://kirilklein.github.io/causal-sandbox/) is the browser lab. This repository is its companion course.
 
+Inspired by Rohit Ghumare's **[AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch)**, this course brings its phased, hands-on learning format to causal inference, with guided Causal Sandbox experiments at the center of each lesson.
+
 **[Start reading](phases/01-causal-questions/01-what-if/README.md) · [Open the interactive lab](https://kirilklein.github.io/causal-sandbox/?lesson=what-if) · [See the curriculum](CURRICULUM.md)**
 
 ## Three ways to learn
@@ -16,7 +18,7 @@ Start with everyday reasoning about averages. The opening lessons introduce thei
 
 ## Available chapters
 
-These three chapters are complete local course material. The rest of the [curriculum](CURRICULUM.md) is a roadmap with links to existing Sandbox lessons, clearly separated from proposed additions.
+**Initial release: three chapters**, each with a written lesson, a runnable Python lab, exercises, and worked solutions. The rest of the [curriculum](CURRICULUM.md) is a roadmap that distinguishes existing Sandbox lessons awaiting adaptation from proposed additions.
 
 | Chapter | The question you will answer | Experiment |
 | --- | --- | --- |
@@ -37,10 +39,17 @@ Each chapter includes exercises and separate worked solutions. You leave with a 
 
 ## Run the first lab
 
-Python 3.10 or newer is sufficient. There are no third-party dependencies. From this repository's directory:
+Python 3.10 or newer is sufficient. There are no third-party dependencies. Clone the course and run the opening lab:
 
 ```bash
+git clone https://github.com/kirilklein/causal-inference-from-scratch.git
+cd causal-inference-from-scratch
 python3 phases/01-causal-questions/01-what-if/code/simulation.py
+```
+
+Continue with the randomization and confounding labs:
+
+```bash
 python3 phases/01-causal-questions/02-randomization/code/simulation.py
 python3 phases/02-learning-from-comparisons/01-confounding/code/simulation.py
 ```

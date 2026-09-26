@@ -1,0 +1,27 @@
+{
+  "title": "Causal Inference from Scratch",
+  "sandbox_revision": "57fd76c6a33e5610bdd7524aecf7da3ee06385ac",
+  "lessons": [
+    {
+      "id": "what-if",
+      "title": "What if?",
+      "path": "phases/01-causal-questions/01-what-if",
+      "prerequisites": [],
+      "sandbox_url": "https://kirilklein.github.io/causal-sandbox/?lesson=what-if"
+    },
+    {
+      "id": "randomization",
+      "title": "A randomized comparison",
+      "path": "phases/01-causal-questions/02-randomization",
+      "prerequisites": ["what-if"],
+      "sandbox_url": "https://kirilklein.github.io/causal-sandbox/?lesson=randomization"
+    },
+    {
+      "id": "confounding",
+      "title": "When treatment selection changes the comparison",
+      "path": "phases/02-learning-from-comparisons/01-confounding",
+      "prerequisites": ["randomization"],
+      "sandbox_url": "https://kirilklein.github.io/causal-sandbox/?lesson=confounding"
+    }
+  ]
+}

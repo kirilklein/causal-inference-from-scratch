@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 820" role="img" aria-labelledby="banner-mobile-title banner-mobile-desc">
+  <title id="banner-mobile-title">Causal Inference from Scratch</title>
+  <desc id="banner-mobile-desc">An interactive field guide: define the causal question, justify the comparison, then estimate the effect. Three opening chapters are available.</desc>
+  <defs>
+    <pattern id="banner-mobile-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.7" fill="#4053f4" opacity="0.12"/></pattern>
+    <marker id="banner-mobile-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L7 4 L0 8" fill="none" stroke="#8a95ad" stroke-width="1.2"/></marker>
+  </defs>
+  <rect width="720" height="820" fill="#fafaf6"/>
+  <rect width="720" height="820" fill="url(#banner-mobile-dots)"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#192226">
+    <text x="44" y="48" font-family="'Courier New', monospace" font-size="18" letter-spacing="2" fill="#4053f4">FIELD GUIDE / 001</text>
+    <text x="676" y="48" text-anchor="end" font-family="'Courier New', monospace" font-size="18" fill="#59636f">OPEN SOURCE</text>
+    <path d="M44 72 H676" stroke="#d6dce1"/>
+    <g font-size="76" font-weight="700" letter-spacing="-3">
+      <text x="40" y="168" fill="#4053f4">CAUSAL</text>
+      <text x="40" y="248" fill="#4053f4">INFERENCE</text>
+      <text x="40" y="328" font-size="68">FROM SCRATCH.</text>
+    </g>
+    <text x="44" y="380" font-family="Georgia, 'Times New Roman', serif" font-size="27">Understand what would change if we intervened.</text>
+    <text x="44" y="428" font-family="'Courier New', monospace" font-size="17" letter-spacing="1" fill="#4053f4">THE CAUSAL REASONING PATH</text>
+    <g fill="none" stroke="#8a95ad" stroke-width="1.5" marker-end="url(#banner-mobile-arrow)">
+      <path d="M76 536 V556"/><path d="M76 636 V656"/>
+    </g>
+    <rect x="44" y="456" width="632" height="80" rx="6" fill="#fafaf6" stroke="#b7beca"/>
+    <rect x="44" y="560" width="632" height="76" rx="6" fill="#fafaf6" stroke="#b7beca"/>
+    <rect x="44" y="660" width="632" height="76" rx="6" fill="#eef0ff" stroke="#4053f4"/>
+    <g font-family="'Courier New', monospace" font-size="22" fill="#4053f4">
+      <text x="64" y="490">01</text><text x="64" y="592">02</text><text x="64" y="692">03</text>
+    </g>
+    <g font-size="30" font-weight="600">
+      <text x="124" y="490">Define the question</text>
+      <text x="124" y="592">Justify the comparison</text>
+      <text x="124" y="692">Estimate the effect</text>
+    </g>
+    <g font-size="22" fill="#59636f">
+      <text x="124" y="520">Whose effect, of what, and when?</text>
+      <text x="124" y="622">Which assumptions make it valid?</text>
+      <text x="124" y="722">What can the data tell us?</text>
+    </g>
+    <path d="M44 760 H676" stroke="#d6dce1"/>
+    <text x="44" y="794" font-family="'Courier New', monospace" font-size="17" letter-spacing="0.5" fill="#59636f">3 CHAPTERS · PYTHON LABS · CAUSAL SANDBOX</text>
+  </g>
+</svg>

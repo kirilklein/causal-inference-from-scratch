@@ -4,10 +4,26 @@ import json
 import re
 import subprocess
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+class HTMLLinks(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.targets = []
+
+    def handle_starttag(self, tag, attrs):
+        for key, value in attrs:
+            if value and key in ("href", "src"):
+                self.targets.append(value)
+            elif value and key == "srcset":
+                self.targets.extend(
+                    item.strip().split()[0] for item in value.split(",") if item.strip()
+                )
 
 
 def check():
@@ -41,15 +57,19 @@ def check():
     if not labs:
         raise ValueError("The course has no registered lessons.")
 
-    # The authored Markdown uses inline links; external availability is not checked.
+    # Check inline Markdown links and embedded HTML; external availability is not checked.
     for document in ROOT.rglob("*.md"):
         if any(part.startswith(".") for part in document.relative_to(ROOT).parts):
             continue
         if document.name == "CAUSAL-LEARNING.md":
             continue
-        for target in re.findall(r"\[[^\]]*\]\(([^\s)]+)\)", document.read_text()):
+        content = document.read_text()
+        html = HTMLLinks()
+        html.feed(content)
+        targets = re.findall(r"\[[^\]]*\]\(([^\s)]+)\)", content) + html.targets
+        for target in targets:
             url = urlsplit(target)
-            if url.scheme or not url.path:
+            if url.scheme or url.netloc or not url.path:
                 continue
             destination = (document.parent / unquote(url.path)).resolve()
             if not destination.is_relative_to(ROOT) or not destination.exists():

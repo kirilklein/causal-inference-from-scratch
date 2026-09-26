@@ -27,8 +27,11 @@ From the repository root, using Python 3.10 or newer:
 ```bash
 python3 -m unittest discover -s tests -v
 python3 scripts/check_course.py
+python3 scripts/export_diagrams.py --check
 ```
 
 `unittest` checks numerical and scientific invariants. `check_course.py` checks local links, the lesson manifest, prerequisites, and required artifacts, then runs all registered labs. It does not verify external website availability or learner comprehension. No third-party formatter or linter is required by this repository.
+
+README artwork is authored as self-contained HTML and exported to SVG. See [artwork maintenance](assets/README.md). When adding a chapter, update the visible counts and status labels as well as the manifest. See [automation and publishing](docs/automation.md) for the current CI scope and future website options.
 
 Learner progress belongs in ignored `CAUSAL-LEARNING.md`, not in commits. Tutor practice attempts and first answers should remain distinguishable.
